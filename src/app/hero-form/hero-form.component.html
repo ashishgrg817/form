@@ -1,0 +1,90 @@
+<div class="container">
+  <div [hidden]="submitted">
+    <h1>Form</h1>
+    <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+      <div class="form-group">
+        <label for="userid">UserId</label>
+        <input type="number" class="form-control" id="userid" required maxlength="5"
+               [(ngModel)]="model.userid" name="name"
+               #userid="ngModel">
+        <div [hidden]="userid.valid || userid.pristine"
+             class="alert alert-danger">
+          UserId is required
+        </div>
+        
+      </div>
+
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" id="title" required maxlength="40"
+               [(ngModel)]="model.title" name="title" #title="ngModel">
+               <div [hidden]="title.valid || title.pristine"
+             class="alert alert-danger">
+          Title is required
+        </div>
+      </div>
+
+      <div class="form-group">
+          <label for="body">Body</label>
+          <input type="text" class="md-textarea form-control" id="body" required maxlength="100"
+               [(ngModel)]="model.body" name="body" #body="ngModel">
+               <div [hidden]="body.valid || body.pristine"
+             class="alert alert-danger">
+          Body is required
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-success" [disabled]="!heroForm.form.valid">Submit</button>
+      <button type="button" class="btn btn-default" (click)="newHero(); heroForm.reset()">Reset</button>
+      <i></i>
+
+      &nbsp;&nbsp;
+      
+     <!-- NOT SHOWN IN DOCS -->
+      <div>
+        <hr>
+        Details via form.controls = {{showFormControls(heroForm)}}
+      </div>
+     <!-- - -->
+    </form>
+  </div>
+
+  <div [hidden]="!submitted">
+    <h2>You submitted the following:</h2>
+    <div class="row">
+      <div class="col-xs-3">userid</div>
+      <div class="col-xs-9">{{ model.userid }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">title</div>
+      <div class="col-xs-9">{{ model.title }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">body</div>
+      <div class="col-xs-9">{{ model.body }}</div>
+    </div>
+    <br>
+    <button class="btn btn-primary" (click)="submitted=false">Edit</button>
+  </div>
+</div>
+
+<!-- ====================================================  -->
+  <div>
+    <form>
+
+       <!-- ... all of the form ... -->
+
+    </form>
+  </div>
+
+<!-- ====================================================  -->
+<hr>
+<style>
+  .no-style .ng-valid {
+  border-left: 1px  solid #CCC
+}
+
+  .no-style .ng-invalid {
+  border-left: 1px  solid #CCC
+}
+</style>
